@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smit-Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 style="text-align: center; margin-bottom: 30px; margin-top: 20px;">Quiz Application</h1>
+    <hr>
+    <div class="timer" >
+        <h3 id="countdown"></h3>
+        <h3></h3>
+        <h3 id="countdown"></h3>
+    </div>
+    <div class="box">
+        <div class="content">
+            <div>
+                <p id="ques"></p>
+            </div>
+            <div>
+                <input onclick="btnWork()" type="radio"name="quiz">
+                <label id="opt1" for=""></label>
+            </div>
+            <div>
+                <input onclick="btnWork()" type="radio"name="quiz">
+                <label id="opt2" for=""></label>
+            </div>
+            <div>
+                <input onclick="btnWork()" type ="radio"name="quiz">
+                <label id="opt3" for=""></label>
+            </div>
+            <br> <br>
+            <button id="btn" onclick="nextQuestion()">Next</button>
+            <button id="btn" onclick="reset()">Reset</button>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="apps.js"></script>
+</body>
+</html>
