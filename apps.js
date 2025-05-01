@@ -8,9 +8,23 @@ let interval;
     let sec = totalTime % 60;
     sec = sec < 10 ? '0' + sec : sec;
     countdown.innerHTML = `${min} : ${sec}`;
-    totalTime-- ;
-},1000)
 
+    if(totalTime <= 0){
+        endQuiz();
+    }
+    else{
+        totalTime-- ;
+    }
+},100)
+
+function endQuiz(){
+    clearInterval(interval);
+    Swal.fire({
+        title: "Time's Up!",
+        text: `Your Score is ${score}`,
+        icon: "info"
+    })
+}
 function reset(){
     location.reload()
     clearInterval(interval)
@@ -88,7 +102,8 @@ function nextQuestion(){
     for(let i=0; i<getInputs.length; i++){
         getInputs.checked = false;
     }
-    if(index > questions.length -1 && correctOption.checked){
+    if(index > questions.length -1){
+        clearInterval(interval)
         Swal.fire({
             title: "Quiz End!",
             text: `Your Score is ${score}`,
@@ -103,10 +118,42 @@ function nextQuestion(){
         index++
     }
     getBtn.disabled = true;
-    scores()
 }   
 nextQuestion();
-
-function btnWork(){
+/*function btnWork(){
     getBtn.disabled = false;
+    
+    let selectedOption;
+    
+    if(document.getElementById("opt1").checked){
+        selectedOption = document.getElementById("opt1").innerText;
+    }
+    else if(document.getElementById("opt2")){
+        selectedOption = document.getElementById("opt2").innerText;
+    }
+    else if(document.getElementById("opt3")){
+        selectedOption = document.getElementById("opt3").innerText;
+    }
+    if(selectedOption === questions[index-1].correctOption){
+        score++;
+    }
+}*/
+function btnWork() {
+    getBtn.disabled = false;
+
+    let options = document.getElementsByName("quiz");
+    let selectedText = "";
+
+    for (let i = 0; i < options.length; i++) {
+        if (options[i].checked) {
+            if (i === 0) selectedText = document.getElementById("opt1").innerText;
+            else if (i === 1) selectedText = document.getElementById("opt2").innerText;
+            else if (i === 2) selectedText = document.getElementById("opt3").innerText;
+            break;
+        }
+    }
+
+    if (selectedText === questions[index-1].correctOption) {
+        score++;
+    }
 }
